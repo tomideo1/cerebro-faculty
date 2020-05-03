@@ -1,6 +1,6 @@
 <template>
     <div>
-        <b-navbar class="is-dark" fixed-top>
+        <b-navbar class="is-dark" >
             <template slot="brand">
                 <b-navbar-item tag="router-link" :to="{ path: '/' }">
                     <img
@@ -15,6 +15,12 @@
                             src="@/assets/eic-logo.png"
                             alt="Cerebro Faculty"
                     />
+                </b-navbar-item>
+                <b-navbar-item tag="router-link" :to="{ path: '/' }" v-if="$route.path === '/member'">
+                    <button class="button is-light">
+                        <b-icon icon="keyboard_arrow_left"></b-icon>
+                        <span>Back to List</span>
+                    </button>
                 </b-navbar-item>
             </template>
             <template slot="end">

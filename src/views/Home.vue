@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <section class="hero " style="background:#FFFFFF;">
       <div class="hero-body  flex-center">
         <div class="container">
