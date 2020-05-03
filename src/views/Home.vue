@@ -104,7 +104,10 @@
                     "image" : data.profile_url,
                     "firstname" : data.firstname,
                     "lastname" : data.lastname,
-                    "role" : data.role.join()
+                    "role" : data.role.join(),
+                    "linked_in" : data.faculty.data.linked_in,
+                    "about" : data.faculty.data.about,
+                    "faculty_id" : data.faculty.data.faculty_id,
                   })
                 })
 
@@ -114,7 +117,7 @@
     }
   };
 </script>
-<style lang="css" scoped>
+<style lang="css" >
   .avatar {
     width: 80px;
     height: 80px;
