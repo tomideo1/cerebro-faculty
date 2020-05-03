@@ -92,9 +92,9 @@
 
                 </b-tag>
               </b-table-column>
-              <b-table-column label=" " >
+              <b-table-column label="" >
                 <span>
-                  <b-button type="is-dark">View</b-button>
+                  <b-button @click="getRow(props.row)"  type="is-dark">View</b-button>
                 </span>
               </b-table-column>
             </template>
@@ -118,7 +118,9 @@
       }
     },
     methods:{
-
+      getRow(current){
+        alert(current.firstname)
+      }
     },
     mounted() {
       axios.get('https://api.cerebro.work/v1/faculty')
