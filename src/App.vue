@@ -18,7 +18,7 @@
                 </b-navbar-item>
                 <b-navbar-item tag="router-link" :to="{ path: '/' }" v-if="$route.path === '/member'">
                     <button class="button is-light">
-                        <b-icon icon="keyboard_arrow_left"></b-icon>
+                        <i class="fa fa-arrow"></i>
                         <span>Back to List</span>
                     </button>
                 </b-navbar-item>

@@ -27,11 +27,11 @@
           <b-table :data="data" paginated hoverable
                    :per-page="'4'">
             <template slot-scope="props">
-              <b-table-column field="image" label="" width="100"  >
+              <b-table-column field="image" label="" width="100" style="margin-top:20px" >
                 <img class="avatar" :src="props.row.image">
 
               </b-table-column>
-              <b-table-column field="firstname" label="First Name"  searchable>
+              <b-table-column  field="firstname" label="First Name"  searchable>
                 <template slot="header" slot-scope="{ column }">
                   <b-tooltip :label="column.label" dashed>
                     {{ column.label }}
