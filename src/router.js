@@ -3,15 +3,24 @@ import Router from "vue-router";
 
 //Admin Routes
 import Home from "./views/Home.vue";
+import Single from "./views/single.vue";
 
 Vue.use(Router);
 
 //   base: process.env.BASE_URL,
-const routes = [{
+const routes = [
+    {
     path: "/",
     name: "home",
     component: Home,
-}, ];
+    },
+    {
+        path: "/member",
+        name: "single",
+        props: true,
+        component: Single,
+    },
+];
 
 const router = new Router({
     mode: "history",

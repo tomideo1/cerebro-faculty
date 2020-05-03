@@ -1,36 +1,6 @@
 <template>
   <div>
-    <b-navbar class="is-dark" fixed-top>
-      <template slot="brand">
-        <b-navbar-item tag="router-link" :to="{ path: '/' }">
-          <img
-                  style="max-height: 50px"
-                  src="https://res.cloudinary.com/dldd8ucby/image/upload/v1587851649/cerebro/cerebrologo_2x.png"
-                  alt="Cerebro Faculty"
-          />
-        </b-navbar-item>
-        <b-navbar-item tag="router-link" :to="{ path: '/' }">
-          <img
-                  style="max-height: 50px"
-                  src="@/assets/eic-logo.png"
-                  alt="Cerebro Faculty"
-          />
-        </b-navbar-item>
-      </template>
-      <template slot="end">
-        <b-navbar-dropdown label="EN">
-          <b-navbar-item href="#">
-            EN
-          </b-navbar-item>
-          <b-navbar-item href="#">
-            PR
-          </b-navbar-item>
-          <b-navbar-item href="#">
-            FT
-          </b-navbar-item>
-        </b-navbar-dropdown>
-      </template>
-    </b-navbar>
+
     <section class="hero " style="background:#FFFFFF;">
       <div class="hero-body  flex-center">
         <div class="container">
@@ -119,7 +89,12 @@
     },
     methods:{
       getRow(current){
-        alert(current.firstname)
+        this.$router.push({
+          name: 'single',
+          params: {
+            items: current
+          }
+        });
       }
     },
     mounted() {

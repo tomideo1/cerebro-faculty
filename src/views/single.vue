@@ -5,8 +5,12 @@
 </template>
 
 <script>
+
     export default {
-        name: "single"
+        name: "single",
+        props: ["items"],
+        mounted() {
+        }
     }
 </script>
 
