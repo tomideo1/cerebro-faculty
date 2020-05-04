@@ -6,7 +6,7 @@
           <h2 class="title has-text-centered">
             Welcome the Cerebro Faculty Page
           </h2>
-          <p class="subtitle mx-auto">
+          <p class="subtitle has-text-centered">
             Members help with verifying, mentoring and coaching developers from the Talent Program
           </p>
         </div>
