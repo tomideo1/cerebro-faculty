@@ -63,7 +63,7 @@
 
 <!--                </b-tag>-->
 <!--              </b-table-column>-->
-              <b-table-column label="Faculty Id" >
+              <b-table-column label="Faculty ID" >
                 <template slot="header" slot-scope="{ column }">
                   <b-tooltip :label="column.label" dashed>
                     {{ column.label }}
