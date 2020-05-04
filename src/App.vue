@@ -4,15 +4,8 @@
             <template slot="brand">
                 <b-navbar-item tag="router-link" :to="{ path: '/' }">
                     <img
-                            style="max-height: 50px"
+                            style="max-height: 100px"
                             src="https://res.cloudinary.com/dldd8ucby/image/upload/v1587851649/cerebro/cerebrologo_2x.png"
-                            alt="Cerebro Faculty"
-                    />
-                </b-navbar-item>
-                <b-navbar-item tag="router-link" :to="{ path: '/' }">
-                    <img
-                            style="max-height: 50px"
-                            src="@/assets/eic-logo.png"
                             alt="Cerebro Faculty"
                     />
                 </b-navbar-item>
@@ -21,6 +14,15 @@
                         <i class="fa fa-arrow"></i>
                         <span>Back to List</span>
                     </button>
+                </b-navbar-item>
+            </template>
+            <template slot="end">
+                <b-navbar-item  tag="router-link" :to="{ path: '/' }">
+                    <img
+                            style="max-height: 50px"
+                            src="@/assets/eic-logo.png"
+                            alt="Cerebro Faculty"
+                    />
                 </b-navbar-item>
             </template>
 

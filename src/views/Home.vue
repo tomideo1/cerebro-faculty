@@ -3,9 +3,12 @@
     <section class="hero " style="background:#FFFFFF;">
       <div class="hero-body  flex-center">
         <div class="container">
-          <h4 class="subtitle has-text-centered">
-            Find List of Verified Faculty Members on Cerebro
-          </h4>
+          <h2 class="title has-text-centered">
+            Welcome the Cerebro Faculty Page
+          </h2>
+          <p class="subtitle mx-auto">
+            Members help with verifying, mentoring and coaching developers from the Talent Program
+          </p>
         </div>
       </div>
     </section>
@@ -16,7 +19,7 @@
             Faculty Members ({{data.length}})
           </h2>
           <p class="subtitle is-left">
-            You can search for a faculty member below using the find box and/or filters
+            You can look for a faculty member below using the search box(s) and/or filters
           </p>
         </div>
       </div>
@@ -49,17 +52,17 @@
                 {{ props.row.lastname }}
               </b-table-column>
 
-              <b-table-column field="role" label="Role" searchable >
-                <template slot="header" slot-scope="{ column }">
-                  <b-tooltip :label="column.label" dashed>
-                    {{ column.label }}
-                  </b-tooltip>
-                </template>
-                <b-tag type="is-success">
-                  {{ props.row.role }}
+<!--              <b-table-column field="role" label="Role" searchable >-->
+<!--                <template slot="header" slot-scope="{ column }">-->
+<!--                  <b-tooltip :label="column.label" dashed>-->
+<!--                    {{ column.label }}-->
+<!--                  </b-tooltip>-->
+<!--                </template>-->
+<!--                <b-tag type="is-success">-->
+<!--                  {{ props.row.role }}-->
 
-                </b-tag>
-              </b-table-column>
+<!--                </b-tag>-->
+<!--              </b-table-column>-->
               <b-table-column label="Faculty Id" >
                 <template slot="header" slot-scope="{ column }">
                   <b-tooltip :label="column.label" dashed>
@@ -73,7 +76,7 @@
                         <button  v-clipboard:copy="props.row.faculty_id"
                                  v-clipboard:success="onCopy"
                                  v-clipboard:error="onError"
-                                 class="button is-primary"><small>copy</small></button>
+                                 class="button is-primary"><small>COPY ID</small></button>
                       </p>
                     </b-field>
                 </span>
@@ -81,7 +84,7 @@
               <b-table-column label="" >
 
                 <span>
-                  <b-button @click="getRow(props.row)"  type="is-dark">View</b-button>
+                  <b-button @click="getRow(props.row)"  type="is-dark">View Profile</b-button>
                 </span>
               </b-table-column>
             </template>

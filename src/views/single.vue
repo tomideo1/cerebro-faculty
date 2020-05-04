@@ -22,7 +22,7 @@
                       <button  v-clipboard:copy="items.faculty_id"
                                v-clipboard:success="onCopy"
                                v-clipboard:error="onError"
-                               class="button is-primary"><small>copy</small></button>
+                               class="button is-primary"><small>COPY ID</small></button>
                   </p>
               </b-field>
 
