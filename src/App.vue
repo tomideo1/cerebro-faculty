@@ -23,19 +23,7 @@
                     </button>
                 </b-navbar-item>
             </template>
-            <template slot="end">
-                <b-navbar-dropdown label="EN">
-                    <b-navbar-item href="#">
-                        EN
-                    </b-navbar-item>
-                    <b-navbar-item href="#">
-                        PR
-                    </b-navbar-item>
-                    <b-navbar-item href="#">
-                        FT
-                    </b-navbar-item>
-                </b-navbar-dropdown>
-            </template>
+
         </b-navbar>
         <router-view/>
     </div>

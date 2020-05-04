@@ -29,7 +29,6 @@
             <template slot-scope="props">
               <b-table-column field="image" label="" width="100" style="margin-top:20px" >
                 <img class="avatar" :src="props.row.image">
-
               </b-table-column>
               <b-table-column  field="firstname" label="First Name"  searchable>
                 <template slot="header" slot-scope="{ column }">
@@ -61,7 +60,26 @@
 
                 </b-tag>
               </b-table-column>
+              <b-table-column label="Faculty Id" >
+                <template slot="header" slot-scope="{ column }">
+                  <b-tooltip :label="column.label" dashed>
+                    {{ column.label }}
+                  </b-tooltip>
+                </template>
+                <span>
+                    <b-field>
+                      <b-input v-model="props.row.faculty_id" icon=""></b-input>
+                      <p class="control">
+                        <button  v-clipboard:copy="props.row.faculty_id"
+                                 v-clipboard:success="onCopy"
+                                 v-clipboard:error="onError"
+                                 class="button is-primary"><small>copy</small></button>
+                      </p>
+                    </b-field>
+                </span>
+              </b-table-column>
               <b-table-column label="" >
+
                 <span>
                   <b-button @click="getRow(props.row)"  type="is-dark">View</b-button>
                 </span>
@@ -82,8 +100,7 @@
   export default {
     data() {
       return {
-        data: [
-        ]
+        data: [],
       }
     },
     methods:{
@@ -94,6 +111,26 @@
             items: current
           }
         });
+      },
+      onCopy (e) {
+        this.success('You just copied: ' + e.text)
+      },
+      onError (e) {
+        this.danger('Failed to copy texts')
+      },
+      success(message) {
+        this.$buefy.toast.open({
+          message: message,
+          type: 'is-success'
+        })
+      },
+      danger() {
+        this.$buefy.toast.open({
+          duration: 5000,
+          message: `Something's not good, also I'm on bottom`,
+          position: 'is-bottom',
+          type: 'is-danger'
+        })
       }
     },
     mounted() {
