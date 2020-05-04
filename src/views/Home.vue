@@ -71,22 +71,22 @@
                 </template>
                 <span>
                     <b-field>
-                      <b-input v-model="props.row.faculty_id" icon=""></b-input>
+                      <b-input style="max-width: 80px" v-model="props.row.faculty_id" icon=""></b-input>
                       <p class="control">
                         <button  v-clipboard:copy="props.row.faculty_id"
                                  v-clipboard:success="onCopy"
                                  v-clipboard:error="onError"
-                                 class="button is-primary"><small>COPY ID</small></button>
+                                 class="button is-primary"><small>Copy ID</small></button>
                       </p>
                     </b-field>
                 </span>
               </b-table-column>
-              <b-table-column label="" >
+<!--              <b-table-column label="" >-->
 
-                <span>
-                  <b-button @click="getRow(props.row)"  type="is-dark">View Profile</b-button>
-                </span>
-              </b-table-column>
+<!--                <span>-->
+<!--                  <b-button @click="getRow(props.row)"  type="is-dark">View Profile</b-button>-->
+<!--                </span>-->
+<!--              </b-table-column>-->
             </template>
           </b-table>
         </div>
