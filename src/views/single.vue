@@ -30,7 +30,7 @@
 
           <!-- bit of a bio; who are you? -->
           <div class="profile-bio">
-
+              <h3 ><b>About Me</b></h3>
               <p v-html="items.about">
               </p>
 
