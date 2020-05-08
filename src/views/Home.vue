@@ -134,7 +134,7 @@
       success(message) {
         this.$buefy.toast.open({
           message: message,
-          type: 'is-success'
+          type: 'is-primary'
         })
       },
       danger() {
