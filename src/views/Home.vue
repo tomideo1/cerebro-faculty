@@ -27,13 +27,18 @@
     <section>
       <div class="card">
         <div class="card-content">
-          <b-table :data="data" paginated hoverable
-                   :per-page="'4'">
+          <b-table :data="data" paginated hoverable class="table-container is-fullwidth has"
+                   :per-page="'10'">
             <template slot-scope="props">
-              <b-table-column field="image" label="" width="100" style="margin-top:20px" >
-                <img class="avatar" :src="props.row.image">
+              <b-table-column field="image" label="" width="100" >
+                <img class="avatar"
+                     :src="props.row.image.replace('http','https')"
+                     v-if="props.row.image.includes('http')">
+                <img class="avatar"
+                     :src="props.row.image"
+                     v-else>
               </b-table-column>
-              <b-table-column  field="firstname" label="First Name"  searchable>
+              <b-table-column   field="firstname" label="First Name"  searchable style="padding: 40px!important;">
                 <template slot="header" slot-scope="{ column }">
                   <b-tooltip :label="column.label" dashed>
                     {{ column.label }}
@@ -43,7 +48,7 @@
 
               </b-table-column>
 
-              <b-table-column field="lastname" label="Last Name" searchable>
+              <b-table-column field="lastname" label="Last Name" searchable  style="padding: 40px!important;">
                 <template slot="header" slot-scope="{ column }">
                   <b-tooltip :label="column.label" dashed>
                     {{ column.label }}
@@ -52,18 +57,23 @@
                 {{ props.row.lastname }}
               </b-table-column>
 
-<!--              <b-table-column field="role" label="Role" searchable >-->
-<!--                <template slot="header" slot-scope="{ column }">-->
-<!--                  <b-tooltip :label="column.label" dashed>-->
-<!--                    {{ column.label }}-->
-<!--                  </b-tooltip>-->
-<!--                </template>-->
-<!--                <b-tag type="is-success">-->
-<!--                  {{ props.row.role }}-->
+              <b-table-column field="role" label="Sector of Work" searchable  style="padding: 40px!important;">
+                <template slot="header" slot-scope="{ column }">
+                  <b-tooltip :label="column.label" dashed>
+                    {{ column.label }}
+                  </b-tooltip>
+                </template>
+                <div >
+                  <div v-for="tag in props.row.role " class="column" v-if="tag!== 'faculty'">
+                    <b-tag type="is-primary" >
+                      {{ tag  }}
+                    </b-tag>
+                  </div>
 
-<!--                </b-tag>-->
-<!--              </b-table-column>-->
-              <b-table-column label="Faculty ID" >
+                </div>
+
+              </b-table-column>
+              <b-table-column label="Faculty ID"  style="padding: 40px!important;">
                 <template slot="header" slot-scope="{ column }">
                   <b-tooltip :label="column.label" dashed>
                     {{ column.label }}
@@ -144,7 +154,7 @@
                     "image" : data.profile_url,
                     "firstname" : data.firstname,
                     "lastname" : data.lastname,
-                    "role" : data.role.join(),
+                    "role" : data.role,
                     "linked_in" : data.faculty.data.linked_in,
                     "about" : data.faculty.data.about,
                     "faculty_id" : data.faculty.data.faculty_id,
