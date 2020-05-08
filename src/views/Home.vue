@@ -57,21 +57,17 @@
                 {{ props.row.lastname }}
               </b-table-column>
 
-              <b-table-column field="role" label="Sector of Work" searchable  style="padding: 40px!important;">
+              <b-table-column field="role" label="Sector of Work"  searchable  style="padding: 40px!important;">
                 <template slot="header" slot-scope="{ column }">
                   <b-tooltip :label="column.label" dashed>
                     {{ column.label }}
                   </b-tooltip>
                 </template>
-                <div >
-                  <div v-for="tag in props.row.role " class="column" v-if="tag!== 'faculty'">
+                  <div v-for="tag in props.row.role.split(',') " class="column" v-if="tag!== 'faculty'">
                     <b-tag type="is-primary" >
                       {{ tag  }}
                     </b-tag>
                   </div>
-
-                </div>
-
               </b-table-column>
               <b-table-column label="Faculty ID"  style="padding: 40px!important;">
                 <template slot="header" slot-scope="{ column }">
@@ -109,83 +105,81 @@
 </template>
 
 <script>
-  import axios from "axios";
-  export default {
-    data() {
-      return {
-        data: [],
-      }
+import axios from "axios";
+export default {
+  data() {
+    return {
+      data: []
+    };
+  },
+  methods: {
+    getRow(current) {
+      this.$router.push({
+        name: "single",
+        params: {
+          items: current
+        }
+      });
     },
-    methods:{
-      getRow(current){
-        this.$router.push({
-          name: 'single',
-          params: {
-            items: current
-          }
-        });
-      },
-      onCopy (e) {
-        this.success('You just copied: ' + e.text)
-      },
-      onError (e) {
-        this.danger('Failed to copy texts')
-      },
-      success(message) {
-        this.$buefy.toast.open({
-          message: message,
-          type: 'is-primary'
-        })
-      },
-      danger() {
-        this.$buefy.toast.open({
-          duration: 5000,
-          message: `Something's not good, also I'm on bottom`,
-          position: 'is-bottom',
-          type: 'is-danger'
-        })
-      }
+    onCopy(e) {
+      this.success("You just copied: " + e.text);
     },
-    mounted() {
-      axios.get('https://api.cerebro.work/v1/faculty')
-              .then(res => {
-                res.data.data.forEach(data =>{
-                  this.data.push({
-                    "image" : data.profile_url,
-                    "firstname" : data.firstname,
-                    "lastname" : data.lastname,
-                    "role" : data.role,
-                    "linked_in" : data.faculty.data.linked_in,
-                    "about" : data.faculty.data.about,
-                    "faculty_id" : data.faculty.data.faculty_id,
-                  })
-                })
-
-              })
-              .catch()
-
+    onError(e) {
+      this.danger("Failed to copy texts");
+    },
+    success(message) {
+      this.$buefy.toast.open({
+        message: message,
+        type: "is-primary"
+      });
+    },
+    danger() {
+      this.$buefy.toast.open({
+        duration: 5000,
+        message: `Something's not good, also I'm on bottom`,
+        position: "is-bottom",
+        type: "is-danger"
+      });
     }
-  };
+  },
+  mounted() {
+    axios
+      .get("https://api.cerebro.work/v1/faculty")
+      .then(res => {
+        res.data.data.forEach(data => {
+          this.data.push({
+            image: data.profile_url,
+            firstname: data.firstname,
+            lastname: data.lastname,
+            role: data.role.join(),
+            linked_in: data.faculty.data.linked_in,
+            about: data.faculty.data.about,
+            faculty_id: data.faculty.data.faculty_id
+          });
+        });
+      })
+      .catch();
+  }
+};
 </script>
 <style lang="css" >
-  .avatar {
-    width: 80px;
-    height: 80px;
-    border-radius: 40px; /* половина ширины и высоты */
-    margin: 10px;
-  }
-  .topbar{
-    z-index: -2;
-    transition: -webkit-filter .5s;
-    transition: filter .5s,-webkit-filter .5s;
-    height: 70px;
-    pointer-events: none;
-    bottom: -35px;
-    -webkit-filter: brightness(100);
-    filter: brightness(100);
-    background-repeat: repeat-x;
-    background-position: 172px 0;
-    background-image: url('../assets/brush-yellow.png');
-  }
-
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 40px; /* половина ширины и высоты */
+  margin: 10px;
+}
+.topbar {
+  z-index: -2;
+  transition: -webkit-filter 0.5s;
+  transition: filter 0.5s, -webkit-filter 0.5s;
+  height: 70px;
+  pointer-events: none;
+  bottom: -35px;
+  -webkit-filter: brightness(100);
+  filter: brightness(100);
+  background-repeat: repeat-x;
+  background-position: 172px 0;
+  background-image: url("../assets/brush-yellow.png");
+}
 </style>
