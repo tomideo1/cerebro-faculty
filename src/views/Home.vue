@@ -15,13 +15,29 @@
         </section>
       </div>
     </main>
+    <div class="tw-mx-auto tw-flex tw-justify-center tw-mt-4">
+      <input
+        class=" tw-w-full md:tw-w-1/3 tw-bg-white focus:tw-outline-none focus:tw-shadow-outline tw-border tw-border-gray-300 tw-rounded-lg tw-py-2 tw-px-4 tw-block tw-w-full tw-appearance-none tw-leading-normal"
+        type="text"
+        v-model="search"
+        placeholder="Search for a faculty member"
+      />
+    </div>
     <div class="tw-flex tw-flex-wrap tw-my-4">
       <Faculty
         class="tw-w-full md:tw-w-1/3 tw-my-2"
-        v-for="(faculty, index) in faculty"
+        v-for="(faculty, index) in searchFaculty"
         :key="index"
         :faculty="faculty"
       />
+      <section
+        v-if="!loading && searchFaculty.length < 1"
+        class="tw-mx-4 md:tw-mx-8 tw-text-center"
+      >
+        <p class="cerebro-mini tw-block">
+          No faculty members match your query
+        </p>
+      </section>
     </div>
   </div>
 </template>
@@ -33,9 +49,21 @@ export default {
   components: {
     Faculty,
   },
+  computed: {
+    searchFaculty() {
+      return this.faculty.filter((fac) => {
+        return (
+          fac.firstname.toLowerCase().match(this.search.toLowerCase()) ||
+          fac.lastname.toLowerCase().match(this.search.toLowerCase())
+        );
+      });
+    },
+  },
   data() {
     return {
       faculty: [],
+      search: "",
+      loading: true,
     };
   },
   methods: {
@@ -74,6 +102,7 @@ export default {
       .then((res) => {
         console.log(res);
         this.faculty = res.data.data;
+        this.loading = false;
       })
       .catch();
   },

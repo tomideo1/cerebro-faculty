@@ -10,6 +10,7 @@
             :src="faculty.profile_url"
             alt=""
           />
+
           <div class="tw-text-center sm:tw-text-left sm:tw-flex-grow">
             <div class="tw-mb-4">
               <p class="tw-text-xl tw-leading-tight">
