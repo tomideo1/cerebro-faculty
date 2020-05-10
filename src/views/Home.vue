@@ -32,7 +32,7 @@
       />
       <section
         v-if="!loading && searchFaculty.length < 1"
-        class="tw-mx-4 md:tw-mx-8 tw-text-center"
+        class="tw-mx-4 md:tw-mx-8 tw-text-center tw-mx-auto"
       >
         <p class="cerebro-mini tw-block">
           No faculty members match your query
@@ -100,8 +100,7 @@ export default {
     axios
       .get("https://api.cerebro.work/v1/faculty")
       .then((res) => {
-        console.log(res);
-        this.faculty = res.data.data;
+        this.faculty = res.data.data.sort(() => Math.random() - 0.5);
         this.loading = false;
       })
       .catch();
