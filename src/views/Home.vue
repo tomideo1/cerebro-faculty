@@ -1,115 +1,41 @@
 <template>
   <div>
-    <section class="hero " style="background:#FFFFFF;">
-      <div class="hero-body  flex-center">
-        <div class="container">
-          <h2 class="title has-text-centered">
-            Welcome the Cerebro Faculty Page
-          </h2>
-          <p class="subtitle has-text-centered">
-            Members help with verifying, mentoring and coaching developers from the Talent Program
+    <main class="tw-flex tw-flex-wrap">
+      <div
+        class="tw-w-full md:tw-w-3/5 tw-flex tw-items-center tw-justify-center  tw-mx-auto tw-items-top "
+      >
+        <section class="tw-mx-4 md:tw-mx-8 tw-text-center">
+          <span class="cerebro-main tw-block">
+            Welcome the Cerebro Faculty Page</span
+          >
+          <p class="cerebro-mini tw-block">
+            Members help with verifying, mentoring and coaching developers from
+            the Talent Program
           </p>
-        </div>
+        </section>
       </div>
-    </section>
-    <section class="hero is-light">
-      <div class="hero-body flex-center">
-        <div class="container">
-          <h2 class="title is-bold">
-            Faculty Members ({{data.length}})
-          </h2>
-          <p class="subtitle is-left">
-            You can look for a faculty member below using the search box(s) and/or filters
-          </p>
-        </div>
-      </div>
-    </section>
-    <section>
-      <div class="card">
-        <div class="card-content">
-          <b-table :data="data" paginated hoverable class="table-container is-fullwidth has"
-                   :per-page="'10'">
-            <template slot-scope="props">
-              <b-table-column field="image" label="" width="100" >
-                <img class="avatar"
-                     :src="props.row.image.replace('http','https')"
-                     v-if="props.row.image.includes('http')">
-                <img class="avatar"
-                     :src="props.row.image"
-                     v-else>
-              </b-table-column>
-              <b-table-column   field="firstname" label="First Name"  searchable style="padding: 40px!important;">
-                <template slot="header" slot-scope="{ column }">
-                  <b-tooltip :label="column.label" dashed>
-                    {{ column.label }}
-                  </b-tooltip>
-                </template>
-                {{ props.row.firstname }}
-
-              </b-table-column>
-
-              <b-table-column field="lastname" label="Last Name" searchable  style="padding: 40px!important;">
-                <template slot="header" slot-scope="{ column }">
-                  <b-tooltip :label="column.label" dashed>
-                    {{ column.label }}
-                  </b-tooltip>
-                </template>
-                {{ props.row.lastname }}
-              </b-table-column>
-
-              <b-table-column field="role" label="Sector of Work"  searchable  style="padding: 40px!important;">
-                <template slot="header" slot-scope="{ column }">
-                  <b-tooltip :label="column.label" dashed>
-                    {{ column.label }}
-                  </b-tooltip>
-                </template>
-                  <div v-for="tag in props.row.role.split(',') " class="column" v-if="tag!== 'faculty'">
-                    <b-tag type="is-primary" >
-                      {{ tag  }}
-                    </b-tag>
-                  </div>
-              </b-table-column>
-              <b-table-column label="Faculty ID"  style="padding: 40px!important;">
-                <template slot="header" slot-scope="{ column }">
-                  <b-tooltip :label="column.label" dashed>
-                    {{ column.label }}
-                  </b-tooltip>
-                </template>
-                <span>
-                    <b-field>
-                      <b-input style="max-width: 80px" v-model="props.row.faculty_id" icon=""></b-input>
-                      <p class="control">
-                        <button  v-clipboard:copy="props.row.faculty_id"
-                                 v-clipboard:success="onCopy"
-                                 v-clipboard:error="onError"
-                                 class="button is-primary"><small>Copy ID</small></button>
-                      </p>
-                    </b-field>
-                </span>
-              </b-table-column>
-<!--              <b-table-column label="" >-->
-
-<!--                <span>-->
-<!--                  <b-button @click="getRow(props.row)"  type="is-dark">View Profile</b-button>-->
-<!--                </span>-->
-<!--              </b-table-column>-->
-            </template>
-          </b-table>
-        </div>
-        <footer class="card-footer">
-        </footer>
-      </div>
-
-    </section>
+    </main>
+    <div class="tw-flex tw-flex-wrap tw-my-4">
+      <Faculty
+        class="tw-w-full md:tw-w-1/3 tw-my-2"
+        v-for="(faculty, index) in faculty"
+        :key="index"
+        :faculty="faculty"
+      />
+    </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import Faculty from "../components/Faculty";
 export default {
+  components: {
+    Faculty,
+  },
   data() {
     return {
-      data: []
+      faculty: [],
     };
   },
   methods: {
@@ -117,8 +43,8 @@ export default {
       this.$router.push({
         name: "single",
         params: {
-          items: current
-        }
+          items: current,
+        },
       });
     },
     onCopy(e) {
@@ -130,7 +56,7 @@ export default {
     success(message) {
       this.$buefy.toast.open({
         message: message,
-        type: "is-primary"
+        type: "is-primary",
       });
     },
     danger() {
@@ -138,31 +64,22 @@ export default {
         duration: 5000,
         message: `Something's not good, also I'm on bottom`,
         position: "is-bottom",
-        type: "is-danger"
+        type: "is-danger",
       });
-    }
+    },
   },
   mounted() {
     axios
       .get("https://api.cerebro.work/v1/faculty")
-      .then(res => {
-        res.data.data.forEach(data => {
-          this.data.push({
-            image: data.profile_url,
-            firstname: data.firstname,
-            lastname: data.lastname,
-            role: data.role.join(),
-            linked_in: data.faculty.data.linked_in,
-            about: data.faculty.data.about,
-            faculty_id: data.faculty.data.faculty_id
-          });
-        });
+      .then((res) => {
+        console.log(res);
+        this.faculty = res.data.data;
       })
       .catch();
-  }
+  },
 };
 </script>
-<style lang="css" >
+<style lang="css">
 .avatar {
   width: 80px;
   height: 80px;
@@ -181,5 +98,38 @@ export default {
   background-repeat: repeat-x;
   background-position: 172px 0;
   background-image: url("../assets/brush-yellow.png");
+}
+
+.cerebro-top {
+  font-weight: bold;
+  font-size: 28px;
+  line-height: 54px;
+  /* identical to box height */
+
+  color: #4a4edd;
+}
+
+.cerebro-main {
+  font-weight: 900;
+  font-size: 36px;
+  line-height: 58px;
+  /* or 73px */
+
+  color: #000000;
+}
+
+.cerebro-mini {
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+
+  color: #000000;
+}
+
+.cerebro-last {
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 24px;
+  color: #000000;
 }
 </style>
